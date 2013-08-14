@@ -14,10 +14,6 @@ app.controller('LoginCtrl', function($scope) {
 		auth.logout();
 	};
 
-	$scope.checkAuth = function() {
-		console.log($scope);
-	};
-
 	var loginRef = new Firebase('https://angulartodolist.firebaseIO.com/');
 
 	var auth = new FirebaseSimpleLogin(loginRef, function(error, user) {
@@ -35,5 +31,7 @@ app.controller('LoginCtrl', function($scope) {
 			// user is logged out
 			$scope.logedUser = false;
 		}
+
+		$scope.$apply();
 	});
 });
