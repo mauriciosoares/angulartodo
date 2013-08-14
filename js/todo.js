@@ -1,6 +1,4 @@
 app.controller('TodoCtrl', function($scope, LocalStorage) {
-	'use strict';
-
 	$scope.todos = LocalStorage.getItem('todos');
 
 	$scope.arcTodos = LocalStorage.getItem('arcTodos');
@@ -47,7 +45,6 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 	};
 
 	$scope.updateTodo = function(todo, newText) {
-		console.log($scope.todos.length);
 		todo.text = newText;
 	};
 
@@ -58,6 +55,5 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 			LocalStorage.setItem('todos', $scope.todos);
 			LocalStorage.setItem('arcTodos', $scope.arcTodos);
 		}
-	}
-
+	};
 });

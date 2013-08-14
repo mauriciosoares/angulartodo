@@ -1,10 +1,13 @@
 app.factory('LocalStorage', function() {
-	'use strict';
+	// firebase tests
+	var db = new Firebase('https://angulartodolist.firebaseIO.com/');
 
+	// local storage
 	var ls =  window.localStorage;
 
 	var setItem = function(where, list) {
 		ls.setItem(where, JSON.stringify(list));
+		db.set(JSON.stringify(list));
 	};
 
 	var getItem = function(from) {
