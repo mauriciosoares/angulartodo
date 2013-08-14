@@ -6,10 +6,11 @@ function TodoCtrl($scope) {
 		{text: 'build an angular app', done: false}
 	];
 
+	$scope.arcTodos = [];
+
 	$scope.addTodo = function() {
 		$scope.todos.push({text: $scope.todoText});
 		$scope.todoText = '';
-		console.log('teste');
 	};
 
 	$scope.remaining = function() {
@@ -20,5 +21,28 @@ function TodoCtrl($scope) {
 			}
 		});
 		return count;
+	};
+
+	$scope.allArcTodos = function() {
+		return $scope.arcTodos.length;
 	}
+
+	$scope.archive = function() {
+		var oldTodos = $scope.todos;
+		$scope.todos = [];
+
+		angular.forEach(oldTodos, function(todo) {
+			if(!todo.done) {
+				$scope.todos.push(todo);
+			}else{
+				$scope.arcTodos.push(todo);
+			}
+		});
+	}
+
+	$scope.updateTodo = function(todo, newText) {
+		console.log($scope.todos.length);
+		todo.text = newText;
+	};
+
 }

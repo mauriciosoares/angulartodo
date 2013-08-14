@@ -13,19 +13,43 @@
 	<h1>My First Todo with AngularJS</h1>
 	<div ng-controller="TodoCtrl">
 		<div>
-			Remaining {{remaining()}} of {{todos.length}}
+			<h2>Current todos</h2>
+			<div>
+				Remaining {{remaining()}} of {{todos.length}}
+
+				<a href="" ng-click="archive()">archive</a>
+			</div>
+
+			<div>
+				Search: 
+				<input type="text" ng-model="search" />
+			</div>
+
+			<ul>
+				<li ng-repeat="todo in todos | filter:search">
+					<input type="checkbox" ng-model="todo.done" />
+					<span class="done-{{todo.done}}">{{todo.text}}</span>
+				</li>
+			</ul>
 		</div>
-		<ul>
-			<li ng-repeat="todo in todos">
-				<input type="checkbox" ng-model="todo.done" />
-				<span class="done-{{todo.done}}">{{todo.text}}</span>
-			</li>
-		</ul>
 
 		<form ng-submit="addTodo()">
 			<input type="text" ng-model="todoText" />
 			<input type="submit" value="add" />
 		</form>
+		
+		<div>
+			<h2>Archived Todos</h2>
+			<div>Total {{allArcTodos()}}</div>
+			<ul>
+				<li ng-repeat="todo in arcTodos">
+					<span class="done-true">
+						{{todo.text}}
+					</span>
+				</li>
+			</ul>
+		</div>
+
 	</div>
 </body>
 </html>
