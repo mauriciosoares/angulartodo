@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>Todo</title>
+
+	<link rel="stylesheet" href="css/main.css" />
+
+	<script src="js/angular.js"></script>
+	<script src="js/todo.js"></script>
+</head>
+<body>
+	<h1>My First Todo with AngularJS</h1>
+	<div ng-controller="TodoCtrl">
+		<div>
+			Remaining {{remaining()}} of {{todos.length}}
+		</div>
+		<ul>
+			<li ng-repeat="todo in todos">
+				<input type="checkbox" ng-model="todo.done" />
+				<span class="done-{{todo.done}}">{{todo.text}}</span>
+			</li>
+		</ul>
+
+		<form ng-submit="addTodo()">
+			<input type="text" ng-model="todoText" />
+			<input type="submit" value="add" />
+		</form>
+	</div>
+</body>
+</html>
