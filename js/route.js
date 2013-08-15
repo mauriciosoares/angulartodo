@@ -1,5 +1,4 @@
 function routeConfig($routeProvider) {
-	console.log(app);
 	$routeProvider.
 		when('/', {
 			controller: 'LoginCtrl',

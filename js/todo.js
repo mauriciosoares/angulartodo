@@ -1,6 +1,4 @@
 app.controller('TodoCtrl', function($scope, LocalStorage) {
-	console.log(LocalStorage);
-	console.log('teste');
 	$scope.todos = LocalStorage.getItem('todos');
 
 	$scope.arcTodos = LocalStorage.getItem('arcTodos');
