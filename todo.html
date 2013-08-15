@@ -1,0 +1,52 @@
+<div ng-controller="TodoCtrl">
+	<div>
+		<h2>Current todos</h2>
+		<div>
+			Remaining {{remaining()}} of {{todos.length}}
+
+			<a href="" ng-click="archive()">[archive]</a>
+		</div>
+
+		<div>
+			Search: 
+			<input type="text" ng-model="search" />
+		</div>
+
+		<ul>
+			<li ng-repeat="todo in todos | filter:search">
+				<div ng-hide="edit">
+					<!-- {{$index}}
+					{{$first}}
+					{{$middle}}
+					{{$last}} -->
+					<input type="checkbox" ng-model="todo.done" ng-change="updateLocalStorage()" />
+					<span class="done-{{todo.done}}" ng-click="edit=true">{{todo.text}}</span>						
+				</div>
+				<div ng-show="edit">
+					<form ng-submit="editTodo($index, editText); edit=false">
+						<input type="text" ng-model="editText" ng-init="editText=todo.text" />
+					</form>
+					
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<form ng-submit="addTodo()">
+		<input type="text" ng-model="todoText" />
+		<input type="submit" value="add" />
+	</form>
+	
+	<div>
+		<h2>Archived Todos</h2>
+		<div>Total {{allArcTodos()}}</div>
+		<ul>
+			<li ng-repeat="todo in arcTodos">
+				<span class="done-true">
+					{{todo.text}}
+				</span>
+			</li>
+		</ul>
+	</div>
+
+</div>

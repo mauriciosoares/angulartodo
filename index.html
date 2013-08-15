@@ -12,70 +12,16 @@
 
 
 	<script src="js/app.js"></script>
+
 	<script src="js/localstorage.js"></script>
 	<script src="js/todo.js"></script>
 
 	<script src="js/login.js"></script>
+
+	<script src="js/route.js"></script>
 </head>
 <body>
 	<h1>My First Todo with AngularJS</h1>
-	<div ng-controller="TodoCtrl">
-		<div>
-			<h2>Current todos</h2>
-			<div>
-				Remaining {{remaining()}} of {{todos.length}}
-
-				<a href="" ng-click="archive()">[archive]</a>
-			</div>
-
-			<div>
-				Search: 
-				<input type="text" ng-model="search" />
-			</div>
-
-			<ul>
-				<li ng-repeat="todo in todos | filter:search">
-					<div ng-hide="edit">
-						<input type="checkbox" ng-model="todo.done" ng-change="updateLocalStorage()" />
-						<span class="done-{{todo.done}}" ng-click="edit=true">{{todo.text}}</span>						
-					</div>
-					<div ng-show="edit">
-						<form ng-submit="editTodo($index, editText); edit=false">
-							<input type="text" ng-model="editText" ng-init="editText=todo.text" />
-						</form>
-						
-					</div>
-				</li>
-			</ul>
-		</div>
-
-		<form ng-submit="addTodo()">
-			<input type="text" ng-model="todoText" />
-			<input type="submit" value="add" />
-		</form>
-		
-		<div>
-			<h2>Archived Todos</h2>
-			<div>Total {{allArcTodos()}}</div>
-			<ul>
-				<li ng-repeat="todo in arcTodos">
-					<span class="done-true">
-						{{todo.text}}
-					</span>
-				</li>
-			</ul>
-		</div>
-
-	</div>
-	<hr>
-	This is just a test, for implementing Facebook Connect, still working on it :D
-	<div ng-controller="LoginCtrl">
-		<div ng-hide="logedUser">
-			<a href="" ng-click="loginFacebook()">Login with Facebook</a>
-		</div>
-		<div ng-show="logedUser">
-			<a href="" ng-click="logout()">Logout</a>
-		</div>
-	</div>
+	<div ng-view></div>
 </body>
 </html>

@@ -1,4 +1,6 @@
 app.controller('TodoCtrl', function($scope, LocalStorage) {
+	console.log(LocalStorage);
+	console.log('teste');
 	$scope.todos = LocalStorage.getItem('todos');
 
 	$scope.arcTodos = LocalStorage.getItem('arcTodos');
@@ -7,8 +9,6 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 		if($scope.todoText) {
 			$scope.todos.push({text: $scope.todoText});
 			$scope.todoText = '';
-
-			$scope.updateLocalStorage('todos', $scope.todos);
 		} else {
 			alert('Didn\'t you forget something?');
 		}
@@ -39,9 +39,6 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 				$scope.arcTodos.push(todo);
 			}
 		});
-
-		$scope.updateLocalStorage('todos', $scope.todos);
-		$scope.updateLocalStorage('arcTodos', $scope.arcTodos);
 	};
 
 	$scope.updateTodo = function(todo, newText) {
@@ -49,20 +46,20 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 	};
 
 	$scope.updateLocalStorage = function(where, list) {
-		if(where) {
-			LocalStorage.setItem(where, list);
-		} else {
-			LocalStorage.setItem('todos', $scope.todos);
-			LocalStorage.setItem('arcTodos', $scope.arcTodos);
-		}
+		LocalStorage.setItem('todos', $scope.todos);
+		LocalStorage.setItem('arcTodos', $scope.arcTodos);
 	};
 
 	$scope.editTodo = function(index, newText) {
 		if(newText) {
-			$scope.todos[index].text = newText;	
-			$scope.updateLocalStorage('todos', $scope.todos);
+			$scope.todos[index].text = newText;
 		} else {
 			alert('Where is the text?');
 		}
 	};
+
+	$scope.$watch('todos + arcTodos', function() {
+		LocalStorage.setItem('todos', $scope.todos);
+		LocalStorage.setItem('arcTodos', $scope.arcTodos);
+	});
 });
