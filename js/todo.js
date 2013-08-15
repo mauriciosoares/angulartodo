@@ -58,7 +58,11 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 	};
 
 	$scope.editTodo = function(index, newText) {
-		$scope.todos[index].text = newText;
-		$scope.updateLocalStorage('todos', $scope.todos);
+		if(newText) {
+			$scope.todos[index].text = newText;	
+			$scope.updateLocalStorage('todos', $scope.todos);
+		} else {
+			alert('Where is the text?');
+		}
 	};
 });
