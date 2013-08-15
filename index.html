@@ -35,8 +35,16 @@
 
 			<ul>
 				<li ng-repeat="todo in todos | filter:search">
-					<input type="checkbox" ng-model="todo.done" ng-change="updateLocalStorage()" />
-					<span class="done-{{todo.done}}">{{todo.text}}</span>
+					<div ng-hide="edit">
+						<input type="checkbox" ng-model="todo.done" ng-change="updateLocalStorage()" />
+						<span class="done-{{todo.done}}" ng-click="edit=true">{{todo.text}}</span>						
+					</div>
+					<div ng-show="edit">
+						<form ng-submit="editTodo($index, editText); edit=false">
+							<input type="text" ng-model="editText" ng-init="editText=todo.text" />
+						</form>
+						
+					</div>
 				</li>
 			</ul>
 		</div>

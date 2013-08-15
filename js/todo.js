@@ -56,4 +56,9 @@ app.controller('TodoCtrl', function($scope, LocalStorage) {
 			LocalStorage.setItem('arcTodos', $scope.arcTodos);
 		}
 	};
+
+	$scope.editTodo = function(index, newText) {
+		$scope.todos[index].text = newText;
+		$scope.updateLocalStorage('todos', $scope.todos);
+	};
 });
